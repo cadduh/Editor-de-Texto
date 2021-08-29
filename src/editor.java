@@ -13,9 +13,9 @@ public class editor extends JFrame {
 	private JLabel img;
 	private JScrollPane scrollDoTexto;
 	private JMenuBar menuBarra; // Barra de menu
-	private JMenu fontes ;
-	private JMenuItem Arial,timeNewRoman,Georgia,tamanho,cor;
-	
+	private JMenu fontes,Cores ;
+	private JMenuItem Arial,timeNewRoman,Georgia,tamanho;
+	private JMenuItem Vermelho,Azul,Amarelo,Rosa,Roxo,Verde;
 	private JMenuItem calibre[] = new JMenuItem[30];
 	
 	private JTextArea textAreaEditor;
@@ -62,7 +62,7 @@ public class editor extends JFrame {
         
 		//Tamanho
 		
-		tamanho = new JMenu("Tamanho");
+		tamanho = new JMenu("Tamanho   |");
 		
 		for (int i=0; i < 30;i++) {
 			calibre[i] = new JMenuItem(String.valueOf(i));			
@@ -73,12 +73,21 @@ public class editor extends JFrame {
 		
 		
 		//COR 
+		 	
+		Cores = new JMenu("Cores");
+		Amarelo = new JMenuItem("Amarelo");
+		Vermelho = new JMenuItem("Vermelho");
+		Verde = new JMenuItem("Verde");
+		Rosa = new JMenuItem("Rosa");
+		Roxo = new JMenuItem("Roxo");
+		Azul = new JMenuItem("Azul");
 		
-		cor = new JMenu("Cor");
-	    	
-
-		
-
+		Cores.add(Amarelo);
+		Cores.add(Vermelho);
+		Cores.add(Verde);
+		Cores.add(Azul);
+		menuBarra.add(Cores);
+	
 	    setJMenuBar(menuBarra);
 		
 	}
@@ -110,11 +119,53 @@ public class editor extends JFrame {
 			calibre[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					textAreaEditor.setFont(new Font("Arial",0,num));
+					textAreaEditor.setFont(new Font("Arial",2,num));
 					
 				}
 			});
 	   }
+		
+		Amarelo.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				textAreaEditor.setForeground(Color.YELLOW);
+			}
+		});
+		
+		Vermelho.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				textAreaEditor.setForeground(Color.RED);
+			}
+		});
+		
+		Verde.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				textAreaEditor.setForeground(Color.green);
+			}
+		});
+		
+		Azul.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				textAreaEditor.setForeground(Color.blue);
+			}
+		});
+		
+		Rosa.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				textAreaEditor.setForeground(Color.pink);
+			}
+		});
+		
+		Roxo.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				textAreaEditor.setForeground(new Color(153,51,153));
+			}
+		});
 	}
 	
 	public static void main(String[] args) {
