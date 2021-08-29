@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
+
 import java.io.*;
 import java.util.Iterator;
 
@@ -13,11 +14,11 @@ public class editor extends JFrame {
 	private JLabel img;
 	private JScrollPane scrollDoTexto;
 	private JMenuBar menuBarra; // Barra de menu
-	private JMenu fontes,Cores,EstilosdeFonte ;
-	private JMenuItem Arial,timeNewRoman,Georgia,tamanho,Normal,Bold,Italic,BoldItalic;
+	private JMenu fontes,Cores,EstilosdeFonte,File,msg ;
+	private JMenuItem Arial,timeNewRoman,Georgia,tamanho,Normal,Bold,Italic,BoldItalic,Salvar,Abrir,Sair;
 	private JMenuItem Vermelho,Azul,Amarelo,Rosa,Roxo,Verde;
 	private JMenuItem calibre[] = new JMenuItem[30];
-	
+	private FileDialog fileAbrir,fileSalvar;
 	private JTextArea textAreaEditor;
 	private String font = "";
 	private int tamanhoDaLetra = 15;
@@ -40,7 +41,7 @@ public class editor extends JFrame {
 		textAreaEditor = new JTextArea();
 		textAreaEditor.setBackground(new Color(250,250,250));
 		scrollDoTexto = new JScrollPane();
-	    scrollDoTexto.setBounds(10,10,1245,640);
+	    scrollDoTexto.setBounds(10,10,1245,620);
 	    scrollDoTexto.setViewportView(textAreaEditor);
 	    add(scrollDoTexto);
 		
@@ -51,6 +52,26 @@ public class editor extends JFrame {
 			
 		menuBarra = new JMenuBar();
 		menuBarra.setBackground(new Color(250,250,250));
+		
+		File = new JMenu("File  |");
+		File.setFont(new Font("Impact",5,15));
+		
+	    Salvar = new JMenuItem("Salvar");
+	    Abrir = new JMenuItem("Abrir");
+	    Sair = new JMenuItem("Sair");
+	    
+	    
+	    File.add(Salvar);
+	    File.add(Abrir);
+	    File.add(Sair);
+	    
+	    menuBarra.add(File);
+	    
+	    fileAbrir = new FileDialog(this,"Abrido com sucesso",FileDialog.LOAD);
+        fileSalvar = new FileDialog(this,"Salvado com sucesso",FileDialog.SAVE);
+        
+	   
+	    
 		
 		//FONTES
 		fontes = new JMenu("Fontes     |");
@@ -106,15 +127,16 @@ public class editor extends JFrame {
 	    Italic = new JMenuItem("Italic");
 	    BoldItalic = new JMenuItem("Bold Italic");
 	    
+	    msg = new JMenu("");
+	    msg.setFont(new Font("Impact",5,15));
+	    
+	    
 	    EstilosdeFonte.add(Normal);
 	    EstilosdeFonte.add(Bold);
 	    EstilosdeFonte.add(Italic);
 	    EstilosdeFonte.add(BoldItalic);
 	    menuBarra.add(EstilosdeFonte);
-	    
-	    
-	    
-	    
+	    menuBarra.add(msg); 
 		
 	}
 	
@@ -228,6 +250,65 @@ public class editor extends JFrame {
 				textAreaEditor.setFont(new Font(font,3,tamanhoDaLetra));
 				estiloDaLetra = 3;
 				
+			}
+		});
+		
+		Abrir.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					fileAbrir.setVisible(true);
+					if(fileAbrir.getFile() == null) {
+						return;
+					}
+					FileReader ler = new FileReader(fileAbrir.getDirectory() + fileAbrir.getFile() );
+					String s = "";
+					int i = ler.read();
+					while (i != -1) {
+						s = s + (char) i;
+						i = ler.read();
+					}
+					textAreaEditor.setText(s);
+					ler.close();
+					msg.setText("Abrido com sucesso");
+					msg.setForeground(Color.green);
+				} catch (IOException erro) {
+					// TODO: handle exception
+					msg.setText("Error ao abrir");
+					msg.setForeground(Color.red);
+				}
+			}
+		});
+		
+		Salvar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					fileSalvar.setVisible(true);
+					if(fileSalvar.getFile() == null) {
+						return;
+					}
+					FileWriter out = new FileWriter(fileSalvar.getDirectory() + fileSalvar.getFile());
+					out.write(textAreaEditor.getText());
+					out.close();
+					msg.setText("Salvo com Sucesso");
+					msg.setForeground(Color.green);
+				} catch (IOException erro) {
+					// TODO: handle exception
+					msg.setText("Error ao Salvar");
+					msg.setForeground(Color.red);
+				}
+			}
+		});
+		
+		Sair.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(0);
 			}
 		});
 		
