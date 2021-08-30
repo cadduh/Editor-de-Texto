@@ -15,7 +15,7 @@ public class editor extends JFrame {
 	private JScrollPane scrollDoTexto;
 	private JMenuBar menuBarra; // Barra de menu
 	private JMenu fontes,Cores,EstilosdeFonte,File,msg ;
-	private JMenuItem Arial,timeNewRoman,Georgia,tamanho,Normal,Bold,Italic,BoldItalic,Salvar,Abrir,Sair;
+	private JMenuItem Arial,timeNewRoman,Georgia,Roboto,impact,tamanho,Normal,Bold,Italic,BoldItalic,Salvar,Abrir,Sair;
 	private JMenuItem Vermelho,Azul,Amarelo,Rosa,Roxo,Verde;
 	private JMenuItem calibre[] = new JMenuItem[30];
 	private FileDialog fileAbrir,fileSalvar;
@@ -126,11 +126,16 @@ public class editor extends JFrame {
 	    Bold = new JMenuItem("Bold");
 	    Italic = new JMenuItem("Italic");
 	    BoldItalic = new JMenuItem("Bold Italic");
+	    impact = new JMenuItem("Impact");
+	    Roboto = new JMenuItem("Roboto");
+	    
 	    
 	    msg = new JMenu("");
 	    msg.setFont(new Font("Impact",5,15));
 	    
 	    
+	    fontes.add(Roboto);
+	    fontes.add(impact);
 	    EstilosdeFonte.add(Normal);
 	    EstilosdeFonte.add(Bold);
 	    EstilosdeFonte.add(Italic);
@@ -160,6 +165,28 @@ public class editor extends JFrame {
 				textAreaEditor.setFont(new Font("Georgia",estiloDaLetra,tamanhoDaLetra));
 				fontes.setText("Georgia      |");
 				font = "Georgia";
+				
+			}
+		});
+		
+		impact.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				textAreaEditor.setFont(new Font("impact",estiloDaLetra,tamanhoDaLetra));
+				fontes.setText("impact      |");
+				font = "impact";
+				
+			}
+		});
+		
+		Roboto.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				textAreaEditor.setFont(new Font("Roboto",estiloDaLetra,tamanhoDaLetra));
+				fontes.setText("Roboto      |");
+				font = "Roboto";
 				
 			}
 		});
